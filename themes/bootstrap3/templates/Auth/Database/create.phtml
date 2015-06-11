@@ -1,0 +1,61 @@
+<div class="form-group">
+  <label class="col-sm-3 control-label" for="account_firstname"><?=$this->transEsc('First Name')?>:</label>
+  <div class="col-sm-9">
+    <input id="account_firstname" type="text" name="firstname" value="<?=$this->escapeHtmlAttr($this->request->get('firstname'))?>" class="form-control"/>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-sm-3 control-label" for="account_lastname"><?=$this->transEsc('Last Name')?>:</label>
+  <div class="col-sm-9">
+    <input id="account_lastname" type="text" name="lastname" value="<?=$this->escapeHtmlAttr($this->request->get('lastname'))?>" class="form-control"/>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-sm-3 control-label" for="account_email"><?=$this->transEsc('Email Address')?>:</label>
+  <div class="col-sm-9">
+    <input id="account_email" type="email" name="email" value="<?=$this->escapeHtmlAttr($this->request->get('email'))?>" class="form-control"/>
+    <div class="help-block with-errors"></div>
+  </div>
+</div>
+
+<? // mylibcloud need this to capture the patron barcode when they create their account ?>
+<div class="form-group">  
+  <label class="col-sm-3 control-label" for="cat_username"><?=$this->transEsc('Barcode')?>:</label> 
+  <div class="col-sm-9">
+    <input id="cat_username" type="text" name="cat_username" value="<?=$this->escapeHtmlAttr($this->request->get('cat_username'))?>" class="form-control"/>
+    <div class="help-block with-errors"></div>
+  </div>
+</div>
+
+
+<div class="form-group">
+  <label class="col-sm-3 control-label" for="account_username"><?=$this->transEsc('Desired Username')?>:</label>
+  <div class="col-sm-9">
+    <input id="account_username" type="text" name="username" value="<?=$this->escapeHtmlAttr($this->request->get('username'))?>" class="form-control"/>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-sm-3 control-label" for="account_password"><?=$this->transEsc('Password')?>:</label>
+  <div class="col-sm-9">
+    <input id="account_password" type="password" name="password" class="form-control" required aria-required="true"<?=isset($this->passwordPolicy['minLength']) ? ' data-minlength="' . $this->passwordPolicy['minLength'] . '" data-minlength-error="' . $this->escapeHtmlAttr($this->translate('password_minimum_length', array('%%minlength%%' => $this->passwordPolicy['minLength']))) . '"' : ''?><?=isset($this->passwordPolicy['maxLength']) ? ' maxlength="' . $this->passwordPolicy['maxLength'] . '"' : ''?>/>
+    <div class="help-block with-errors"></div>
+  </div>
+</div>
+<div class="form-group">
+  <label class="col-sm-3 control-label" for="account_password2"><?=$this->transEsc('Password Again')?>:</label>
+  <div class="col-sm-9">
+    <input id="account_password2" type="password" name="password2" class="form-control" required aria-required="true" data-match="#account_password" data-match-error="<?=$this->escapeHtmlAttr($this->translate('Passwords do not match'))?>"/>
+    <div class="help-block with-errors"></div>
+  </div>
+</div>
+
+ <? if (isset($this->layout()->allLocs) && count($this->layout()->allLocs) > 1): ?>   <? // mylibcloud ?>
+      <select size="9" name="home_library" >
+      <? foreach ($this->layout()->allLocs as $locCode => $locName): ?>
+       <option value="<?=$locCode?>"<?=$this->layout()->mylib == $locCode ? ' selected="selected"' : ''?>><?=$locName?></option>
+     <? endforeach; ?>
+     </select>
+   <? endif; ?>
+  <br>   <? // mylibcloud ?>
+
+
