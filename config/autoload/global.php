@@ -11,8 +11,11 @@
  * file.
  */
 
+
+/*
         if (!isset($_COOKIE['mylib'])) {  // mylibcookie
                 $myhost = explode('.',$_SERVER['HTTP_HOST']);
+                 error_log(__file__ . ' line ' . __line__ . ' $myhost=' . $myhost,0);
                 if (is_numeric($myhost[0]))
                 {
                   $mylib  = $myhost[0];
@@ -23,6 +26,8 @@
                 setcookie('mylib', $mylib, null, '/');
                 }
         }
+*/
+
 
 return array(
     // ...

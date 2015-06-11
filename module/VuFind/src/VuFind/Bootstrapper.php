@@ -347,14 +347,26 @@ class Bootstrapper
             $viewModel->setVariable('allLangs', $config->Languages);
 
 
-            $mylib = $_COOKIE['mylib']; // cloud-comment1 
+//            $mylib = $_COOKIE['mylib']; // cloud-comment1 
+            $myhost = explode('.',$_SERVER['HTTP_HOST']);
+            //  error_log(__file__ . ' line ' . __line__ . ' $myhost=' . $myhost[0],0);
+            if (is_numeric($myhost[0]))
+            {
+               $mylib  = $myhost[0];
+            } else {
+               $mylib = $_GET['mylib'];
+            }
+            if (is_numeric($mylib)) {
+               setcookie('mylib', $mylib, null, '/');
+            }
+
+            // This mylib needs to be set for the library context we need
             if (strlen($mylib) > 0) {  // mylibcloud
                $viewModel->setVariable('mylib', $mylib);
             } // mylibcloud
+
+
            $viewModel->setVariable('allLocs', $config->Locations);  // mylibcloud
-
-
-
 
         };
         $this->events->attach('dispatch.error', $callback, 9000);
